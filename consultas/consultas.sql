@@ -1,15 +1,19 @@
-# 1. Clientes que não realizaram uma compra
-# Utilizei o SELECT da tabela costumers com informações básicas, juntando com a tabela orders pelo customer_id e a condição final WHERE traz apenas os valores nulos, demonstrando os que não fizeram compras.
+/*
+1. Clientes que não realizaram uma compra
+Utilizei o SELECT da tabela costumers com informações básicas, juntando com a tabela orders pelo customer_id e a condição final WHERE traz apenas os valores nulos, demonstrando os que não fizeram compras.
+*/
 
 SELECT c.custommer_id, c.first_name, c.last_name, c.city, c.state
 FROM customers c
 LEFT JOIN orders o ON c.customer_id = o.customer_id
 WHERE o.order_id IS NULL;
 
-# -----------------------------------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------
 
-# 2. Produtos que não foram comprados
-# Lógica parecida com a primeira listagem, porém com mais JOINs para buscar nome, marca e preço dos produtos em diferntes tabelas
+/*
+2. Produtos que não foram comprados
+Lógica parecida com a primeira listagem, porém com mais JOINs para buscar nome, marca e preço dos produtos em diferntes tabelas
+*/
 
 SELECT
     p.product_id,
@@ -28,10 +32,12 @@ LEFT JOIN
 WHERE
     oi.order_id IS NULL;
 
-# --------------------------------------------------------------------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------------------------------------------------
 
-# 3. Listar produtos sem estoque
-# Lógica parecida com o item anterior, apenas acrescentando a quantidade em estoque da tabela 'stocks'
+/*
+3. Listar produtos sem estoque
+Lógica parecida com o item anterior, apenas acrescentando a quantidade em estoque da tabela 'stocks'
+*/
 
 SELECT
     p.product_id,
@@ -50,11 +56,13 @@ LEFT JOIN
 WHERE
     (s.quantity IN NULL OR s.quantity = 0);
 
-# ---------------------------------------------------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------------------------------------------------------
 
-# 4. Agrupar a quantidade de vendas que uma determinada marca faz por loja.
-# Lógica parecida com as anteriores, porém agora é necessário o acréscimo do SUM para termos as vendas totais e GROUP BY para agrupar e o nome ou id da marca para detalhar.
-    
+/*
+4. Agrupar a quantidade de vendas que uma determinada marca faz por loja.
+Lógica parecida com as anteriores, porém agora é necessário o acréscimo do SUM para termos as vendas totais e GROUP BY para agrupar e o nome ou id da marca para detalhar.
+*/
+
 SELECT
     st.store_name,
     b.brand_name,
@@ -76,9 +84,9 @@ GROUP BY
 ORDER BY
     st.store_name, b.brand_name;
 
-# -----------------------------------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------------------------------------------------
 
-5. Listar funcionários que não estejam relacionados a um pedido
+-- 5. Listar funcionários que não estejam relacionados a um pedido
 
 SELECT
     s.staff_id,
